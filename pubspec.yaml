@@ -1,7 +1,13 @@
-name: mayr_flutter_md_cms
-description: "A new Flutter package project."
-version: 0.0.1
-homepage:
+name: mayr_md_cms
+description: >-
+  A flexible Flutter widget that fetches and renders Markdown content from local
+  assets, network URLs, or custom sources — with built-in loading and error handling.
+version: 0.1.0
+homepage: https://github.com/YoungMayor/mayr_flutter_md_cms
+repository: https://github.com/YoungMayor/mayr_flutter_md_cms
+issue_tracker: https://github.com/YoungMayor/mayr_flutter_md_cms/issues
+documentation: https://github.com/YoungMayor/mayr_flutter_md_cms/wiki
+license: MIT
 
 environment:
   sdk: ^3.7.0
@@ -15,12 +21,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  faker: ^2.2.0
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-
-# The following section is specific to Flutter packages.
-flutter:
+# flutter:
 
   # To add assets to your package, add an assets section, like this:
   # assets:
@@ -52,3 +55,10 @@ flutter:
   #
   # For details regarding fonts in packages, see
   # https://flutter.dev/to/font-from-package
+
+topics:
+  - cms
+  - markdown
+  - flutter
+  - productivity
+  - content
