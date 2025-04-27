@@ -1,0 +1,62 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:mayr_md_cms/mayr_md_cms.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+class MayrMdCmsMarkdownRenderer extends StatelessWidget {
+  const MayrMdCmsMarkdownRenderer({
+    super.key,
+    required this.content,
+    required this.config,
+  });
+
+  final String content;
+  final MayrMdCmsConfig config;
+
+  @override
+  Widget build(BuildContext context) {
+    return Markdown(
+      data: content,
+      shrinkWrap: config.shrinkWrap,
+      physics: config.scrollPhysics,
+      styleSheet: config.markdownStyleSheetToUse(context),
+      onTapLink: (text, href, title) => _onTapLink(text, href, title, context),
+    );
+  }
+
+  void _navigateToInternalPage(BuildContext context, String path) {
+    if (!config.internalPages.containsKey(path)) return;
+
+    Widget Function(BuildContext) builder = config.internalPages[path]!;
+
+    Navigator.of(context).push(MaterialPageRoute(builder: builder));
+  }
+
+  Future _onTapLink(
+    String text,
+    String? href,
+    String title,
+    BuildContext context,
+  ) async {
+    ScaffoldMessengerState messenger = ScaffoldMessenger.of(context);
+
+    if (href == null || href.isEmpty) return;
+
+    if (href.startsWith("internal:")) {
+      return _navigateToInternalPage(context, href);
+    }
+
+    Uri url = Uri.parse(href);
+
+    bool canLaunch = await canLaunchUrl(url);
+
+    if (canLaunch) return launchUrl(url, mode: LaunchMode.externalApplication);
+
+    Clipboard.setData(ClipboardData(text: href));
+
+    messenger.showSnackBar(
+      const SnackBar(content: Text("Link copied to clipboard")),
+    );
+  }
+}
