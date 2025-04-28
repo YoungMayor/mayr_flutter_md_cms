@@ -4,9 +4,13 @@ import 'package:mayr_md_cms/src/core/tools/loaders.dart';
 import 'package:mayr_md_cms/src/widgets/mayr_md_cms_renderer.dart';
 
 final class MayrMdCms {
-  static MayrMdCmsRenderer local(String path, {MayrMdCmsConfig? config}) {
+  static MayrMdCmsRenderer local(
+    String path, {
+    MayrMdCmsConfig? config,
+    bool cache = true,
+  }) {
     return MayrMdCmsRenderer(
-      future: () => Loaders.fromLocal(path),
+      future: () => Loaders.fromLocal(path, cache: cache),
       config: config.orDefault,
     );
   }
