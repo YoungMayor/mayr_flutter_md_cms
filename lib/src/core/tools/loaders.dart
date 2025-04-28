@@ -1,9 +1,10 @@
-class Loaders {
-  static Future<String> fromLocal(String path) async {
-    return "";
-  }
+import 'package:dio/dio.dart';
+import 'package:flutter/services.dart';
 
-  static Future<String> fromNetwork(String href) async {
-    return "";
-  }
+class Loaders {
+  static Future<String> fromLocal(String path) async =>
+      rootBundle.loadString(path);
+
+  static Future<String> fromNetwork(String href) async =>
+      Dio().get(href).toString();
 }

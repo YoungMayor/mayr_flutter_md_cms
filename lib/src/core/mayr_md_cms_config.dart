@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:mayr_md_cms/src/core/mayr_md_cms_types.dart';
+import 'package:mayr_md_cms/src/core/tools/extensions.dart';
 
 class MayrMdCmsConfig {
   final Widget? emptyWidget;
@@ -28,13 +29,9 @@ class MayrMdCmsConfig {
     this.internalPages = const {},
   });
 
-  MarkdownStyleSheet markdownStyleSheetToUse(BuildContext context) {
-    return markdownStyleSheet ?? _defaultMarkdownStyleSheet(context);
-  }
+  MarkdownStyleSheet markdownStyleSheetToUse(BuildContext context) =>
+      markdownStyleSheet ?? _defaultMarkdownStyleSheet(context);
 
-  MarkdownStyleSheet _defaultMarkdownStyleSheet(BuildContext context) {
-    ThemeData theme = Theme.of(context);
-
-    return MarkdownStyleSheet.fromTheme(theme);
-  }
+  MarkdownStyleSheet _defaultMarkdownStyleSheet(BuildContext context) =>
+      MarkdownStyleSheet.fromTheme(context.theme);
 }

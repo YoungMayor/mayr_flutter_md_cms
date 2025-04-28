@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:mayr_md_cms/mayr_md_cms.dart';
+import 'package:mayr_md_cms/src/core/tools/extensions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MayrMdCmsMarkdownRenderer extends StatelessWidget {
@@ -39,24 +39,22 @@ class MayrMdCmsMarkdownRenderer extends StatelessWidget {
     String title,
     BuildContext context,
   ) async {
-    ScaffoldMessengerState messenger = ScaffoldMessenger.of(context);
-
     if (href == null || href.isEmpty) return;
 
     if (href.startsWith("internal:")) {
       return _navigateToInternalPage(context, href);
     }
 
-    Uri url = Uri.parse(href);
+    Uri url = href.toUri;
 
     bool canLaunch = await canLaunchUrl(url);
 
     if (canLaunch) return launchUrl(url, mode: LaunchMode.externalApplication);
 
-    Clipboard.setData(ClipboardData(text: href));
+    if (!context.mounted) return;
 
-    messenger.showSnackBar(
-      const SnackBar(content: Text("Link copied to clipboard")),
-    );
+    href.copyToClipboard();
+
+    context.snackText("Link copied to clipboard");
   }
 }
