@@ -3,7 +3,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:mayr_md_cms/src/core/mayr_md_cms_types.dart';
 import 'package:mayr_md_cms/src/core/tools/extensions.dart';
 
-class MayrMdCmsConfig {
+final class MayrMdCmsConfig {
   final Widget? emptyWidget;
   final Widget? errorWidget;
   final Widget? loadingWidget;
