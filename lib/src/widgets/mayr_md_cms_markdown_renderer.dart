@@ -25,14 +25,6 @@ class MayrMdCmsMarkdownRenderer extends StatelessWidget {
     );
   }
 
-  void _navigateToInternalPage(BuildContext context, String path) {
-    if (!config.internalPages.containsKey(path)) return;
-
-    Widget Function(BuildContext) builder = config.internalPages[path]!;
-
-    Navigator.of(context).push(MaterialPageRoute(builder: builder));
-  }
-
   Future _onTapLink(
     String text,
     String? href,
@@ -42,7 +34,11 @@ class MayrMdCmsMarkdownRenderer extends StatelessWidget {
     if (href == null || href.isEmpty) return;
 
     if (href.startsWith("internal:")) {
-      return _navigateToInternalPage(context, href);
+      if (!config.internalActions.containsKey(href)) return;
+
+      config.internalActions[href]!(context);
+
+      return;
     }
 
     Uri url = href.toUri;

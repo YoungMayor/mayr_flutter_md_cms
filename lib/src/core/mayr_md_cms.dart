@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:mayr_md_cms/src/core/mayr_md_cms_config.dart';
 import 'package:mayr_md_cms/src/core/tools/extensions.dart';
 import 'package:mayr_md_cms/src/core/tools/loaders.dart';
@@ -11,9 +12,13 @@ final class MayrMdCms {
     );
   }
 
-  static MayrMdCmsRenderer newtwork(String href, {MayrMdCmsConfig? config}) {
+  static MayrMdCmsRenderer newtwork(
+    String href, {
+    MayrMdCmsConfig? config,
+    Dio? dioClient,
+  }) {
     return MayrMdCmsRenderer(
-      future: () async => Loaders.fromNetwork(href),
+      future: () async => Loaders.fromNetwork(href, dioClient: dioClient),
       config: config.orDefault,
     );
   }

@@ -10,23 +10,20 @@ final class MayrMdCmsConfig {
 
   final bool shrinkWrap;
 
-  final bool useDefaultStyleSheet;
-
   final ScrollPhysics? scrollPhysics;
 
   final MarkdownStyleSheet? markdownStyleSheet;
 
-  final InternalPages internalPages;
+  final InternalActions internalActions;
 
   const MayrMdCmsConfig({
     this.errorWidget,
     this.loadingWidget,
     this.emptyWidget,
     this.shrinkWrap = false,
-    this.useDefaultStyleSheet = false,
     this.scrollPhysics = const NeverScrollableScrollPhysics(),
     this.markdownStyleSheet,
-    this.internalPages = const {},
+    this.internalActions = const {},
   });
 
   MarkdownStyleSheet markdownStyleSheetToUse(BuildContext context) =>

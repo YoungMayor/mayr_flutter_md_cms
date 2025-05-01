@@ -21,10 +21,9 @@
       - [From Local Asset:](#from-local-asset)
       - [From Network URL:](#from-network-url)
       - [Using a Custom Future:](#using-a-custom-future)
-    - [3. Custom Link Handling](#3-custom-link-handling)
-    - [4. Internal Page Navigation](#4-internal-page-navigation)
-    - [5. Customisation](#5-customisation)
-    - [6. Extend the Package](#6-extend-the-package)
+    - [3. Internal Actions on Links](#3-internal-actions-on-links)
+    - [4. Extend the Package](#4-extend-the-package)
+  - [🛠️  Configuration](#️--configuration)
   - [📢 Additional Information](#-additional-information)
     - [🤝 Contributing](#-contributing)
     - [🐛 Reporting Issues](#-reporting-issues)
@@ -58,7 +57,7 @@ Whether you are building a blog, documentation app, or a CMS-driven mobile app, 
 
   - Option to let users define their custom link handling 🛠️
 
-- Internal Pages Navigation: Add custom internal links in your Markdown (e.g., [About Us](internal:about_us)), and map them to custom pages (e.g., {'internal:about_us': AboutUsPage()}). Clicking such links will navigate to the respective page within your app.
+- Internal Link actions: Add custom internal links in your Markdown (e.g., [About Us](internal:about_us)), and map them to custom actions (e.g., `{'internal:about_us': (context) {...}}`). Clicking such links will run the custom actions provided
 
 - Fully Customisable:
 
@@ -103,10 +102,10 @@ Whether you are building a blog, documentation app, or a CMS-driven mobile app, 
     import 'package:mayr_md_cms/mayr_md_cms.dart';
     ```
 
-> Alternatively, you could install it using the command
-> ```bash
-> flutter pub add mayr_md_cms
-> ```
+    > Alternatively, you could install it using the command
+    > ```bash
+    > flutter pub add mayr_md_cms
+    > ```
 
 
 ## 🚀 Usage
@@ -127,7 +126,12 @@ import 'package:mayr_md_cms/mayr_md_cms.dart';
 If you have a Markdown file in your assets:
 
 ```dart
-MayrMdCms.fromLocal('assets/content.md');
+MayrMdCms.fromLocal(
+  'assets/content.md',
+  config: mayrMdCmsConfig // Config is optional
+);
+
+// More on the config later
 ```
 
 #### From Network URL:
@@ -135,7 +139,14 @@ MayrMdCms.fromLocal('assets/content.md');
 If you want to fetch the Markdown content from a URL:
 
 ```dart
-MayrMdCms.fromNetwork('https://example.com/content.md');
+MayrMdCms.fromNetwork(
+  'https://example.com/content.md',
+  config: mayrMdCmsConfig // Config is optional
+  dioClient: dioClient, // Optional
+);
+
+// You could choose to pass your own instance of dio that would be used in getting the page.
+// This is useful if for example authentication is required to access the page or extra dio configurations are needed
 ```
 
 #### Using a Custom Future:
@@ -149,69 +160,82 @@ MayrMdCms.custom(() async {
 });
 ```
 
-### 3. Custom Link Handling
-
-You can customize how links are handled. By default, valid URLs will open in a browser and invalid ones will copy to clipboard.
-
-To handle the links manually, pass a custom link handler:
-
-```dart
-MayrMdCms.fromNetwork(
-  'https://example.com/content.md',
-  onLinkTap: (String url) {
-    // Custom link handling
-    print('Link tapped: $url');
-  },
-);
-```
-
-### 4. Internal Page Navigation
+### 3. Internal Actions on Links
 
 To create internal navigation in your app, define internal links in your Markdown (e.g., `[About Us](internal:about_us)`), and map them to your custom widgets:
 
-```dart
-MayrMdCms.fromNetwork(
-  'https://example.com/content.md',
-  internalLinks: {
-    'internal:about_us': AboutUsPage(),
-  },
-);
-```
-Now, clicking on the About Us link will navigate to the `AboutUsPage` in your app!
+Internal actions and handlers can be used as below:
 
-### 5. Customisation
+1. #### Define your internal actions on the config:
+    ```dart
+    MayrMdCms.fromNetwork(
+      'https://example.com/content.md',
+      config: MayrMdCmsConfig(
+        internalActions: {
+          "internal:action_one": (context) => print("Link One clicked"),
+          "internal:action_two": (context) => print("Link two clicked"),
+        },
+      ),
+    );
+    ```
 
-You can customise various parts of the widget such as:
+2. #### Add the links to your markdown
+    ```markdown
+    You could choose to perform [Action One](internal:action_one) or even [Action Two](internal:action_two)
+    ```
 
-- The loading widget
+Now when user clicks on any of the action links, the associated actions would be run
 
-- The error widget
-
-- The Markdown styling (CSS-like styling)
-
-```dart
-MayrMdCms.fromNetwork(
-  'https://example.com/content.md',
-  loadingWidget: CircularProgressIndicator(),
-  errorWidget: Text('Failed to load content'),
-  markdownStyles: {
-    'h1': TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-    'p': TextStyle(fontSize: 16),
-  },
-);
-```
-
-### 6. Extend the Package
+### 4. Extend the Package
 
 For more control, you can create a custom class that extends MayrMdCms and override methods or add new logic:
 
 ```dart
 class CustomMdCms extends MayrMdCms {
-  // Custom logic here
+  @override
+  MayrMdCmsConfig get config => MayrMdCmsConfig(
+    loadingWidget: MyCustomLoadingWidget(),
+    errorWidget: MyCustomErrorWidget(),
+    emptyWidget: MyCustomEmptyWidget(),
+    shrinkWrap: true,
+    scrollPhysics: const NeverScrollableScrollPhysics(),
+    internalActions: {
+      "internal:indicate_interest": (context) {...},
+      "internal:go_to_signup": (context) => context.go("/signup"),
+      "internal:switch_theme_dark": (context) => MyThemeSwitcher.toDark(),
+    },
+    markdownStyleSheet: MyCustomMarkdownStyleSheet()
+  );
 }
 ```
-Now you have full flexibility over the widget's behavior!
 
+After the package has been extended, it can then be used as below:
+
+```dart
+CustomMdCms().local(...);
+CustomMdCms().network(...);
+CustomMdCms().custom(...);
+```
+
+## 🛠️  Configuration
+
+Certain aspects of the package can be configured using the `MayrMdCmsConfig(...)` class. A sample configuration is:
+
+```dart
+MayrMdCmsConfig(
+  loadingWidget: MyCustomLoadingWidget(),
+  errorWidget: MyCustomErrorWidget(),
+  emptyWidget: MyCustomEmptyWidget(),
+  shrinkWrap: true,
+  scrollPhysics: const NeverScrollableScrollPhysics(),
+  internalActions: {
+    "internal:indicate_interest": (context) {...},
+    "internal:go_to_signup": (context) => context.go("/signup"),
+    "internal:switch_theme_dark": (context) => MyThemeSwitcher.toDark(),
+  },
+  markdownStyleSheet: MyCustomMarkdownStyleSheet()
+)
+```
 
 ## 📢 Additional Information
 
