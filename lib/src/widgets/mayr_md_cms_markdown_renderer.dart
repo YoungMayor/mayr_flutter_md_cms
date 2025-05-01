@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:mayr_md_cms/mayr_md_cms.dart';
-import 'package:mayr_md_cms/src/core/tools/extensions.dart';
+import 'package:mayr_md_cms/src/tools/extensions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MayrMdCmsMarkdownRenderer extends StatelessWidget {

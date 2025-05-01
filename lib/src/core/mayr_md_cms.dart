@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:mayr_md_cms/src/core/mayr_md_cms_config.dart';
-import 'package:mayr_md_cms/src/core/tools/extensions.dart';
-import 'package:mayr_md_cms/src/core/tools/loaders.dart';
+import 'package:mayr_md_cms/src/tools/extensions.dart';
+import 'package:mayr_md_cms/src/tools/loaders.dart';
 import 'package:mayr_md_cms/src/widgets/mayr_md_cms_renderer.dart';
 
 final class MayrMdCms {

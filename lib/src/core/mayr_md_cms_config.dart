@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:mayr_md_cms/src/core/mayr_md_cms_types.dart';
-import 'package:mayr_md_cms/src/core/tools/extensions.dart';
+import 'package:mayr_md_cms/src/tools/extensions.dart';
 
 final class MayrMdCmsConfig {
   final Widget? emptyWidget;

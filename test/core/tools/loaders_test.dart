@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mayr_md_cms/src/core/tools/loaders.dart';
+import 'package:mayr_md_cms/src/tools/loaders.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../mocks/mock_dio.mocks.dart';
