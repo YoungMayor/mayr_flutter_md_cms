@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## 0.2.0
+
+- Automated deployments added
+
 ## 0.1.0 - Initial Release
 
 - First version of mayr_md_cms released.
