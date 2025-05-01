@@ -2,7 +2,7 @@ name: mayr_md_cms
 description: >-
   A flexible Flutter widget that fetches and renders Markdown content from local
   assets, network URLs, or custom sources — with built-in loading and error handling.
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/YoungMayor/mayr_flutter_md_cms
 repository: https://github.com/YoungMayor/mayr_flutter_md_cms
 issue_tracker: https://github.com/YoungMayor/mayr_flutter_md_cms/issues
