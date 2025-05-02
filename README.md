@@ -57,7 +57,7 @@ Whether you are building a blog, documentation app, or a CMS-driven mobile app, 
 
   - Option to let users define their custom link handling 🛠️
 
-- Internal Link actions: Add custom internal links in your Markdown (e.g., [About Us](internal:about_us)), and map them to custom actions (e.g., `{'internal:about_us': (context) {...}}`). Clicking such links will run the custom actions provided
+- Internal Link actions: Add custom internal links in your Markdown (e.g., `[About Us](internal:about_us)`), and map them to custom actions (e.g., `{'internal:about_us': (context) {...}}`). Clicking such links will run the custom actions provided
 
 - Fully Customisable:
 
