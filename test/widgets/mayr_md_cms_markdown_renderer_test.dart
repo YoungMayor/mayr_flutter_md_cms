@@ -114,10 +114,7 @@ This is a paragraph with **bold** and *italic* text.
         MaterialApp(
           home: Scaffold(
             body: MayrMdCms.custom(
-              () async => '''
-[Action 1](internal:action1)
-[Action 2](internal:action2)
-''',
+              () async => '[Action 1](internal:action1)\n\n[Action 2](internal:action2)',
               config: MayrMdCmsConfig(
                 internalActions: {
                   'internal:action1': (context) {
