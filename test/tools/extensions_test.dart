@@ -107,13 +107,15 @@ void main() {
 
       await tester.pumpWidget(
         MaterialApp(
-          home: Builder(
-            builder: (context) {
-              return ElevatedButton(
-                onPressed: () => context.snackText(testMessage),
-                child: const Text('Show Snackbar'),
-              );
-            },
+          home: Scaffold(
+            body: Builder(
+              builder: (context) {
+                return ElevatedButton(
+                  onPressed: () => context.snackText(testMessage),
+                  child: const Text('Show Snackbar'),
+                );
+              },
+            ),
           ),
         ),
       );
