@@ -90,7 +90,8 @@ class MayrMdCmsMarkdownRenderer extends StatelessWidget {
     bool canLaunch = await canLaunchUrl(url);
 
     if (canLaunch) {
-      return launchUrl(url, mode: LaunchMode.externalApplication);
+      await launchUrl(url, mode: LaunchMode.externalApplication);
+      return;
     }
 
     // URL cannot be launched, copy to clipboard

@@ -87,7 +87,7 @@ void main() {
 
   group('MdCmsConfigExtension', () {
     test('orDefault returns config when not null', () {
-      const config = MayrMdCmsConfig(shrinkWrap: true);
+      const MayrMdCmsConfig? config = MayrMdCmsConfig(shrinkWrap: true);
       final result = config.orDefault;
 
       expect(result, config);
