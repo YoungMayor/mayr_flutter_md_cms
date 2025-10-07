@@ -37,7 +37,7 @@ class MayrMdCmsRenderer extends StatelessWidget {
           return config.loadingWidget ?? _defaultLoadingWidget();
         } else if (snapshot.hasError) {
           return config.errorWidget ?? _defaultErrorWidget();
-        } else if (!snapshot.hasData || snapshot.data == null) {
+        } else if (!snapshot.hasData || snapshot.data == null || snapshot.data!.isEmpty) {
           return config.emptyWidget ?? _defaultEmptyWidget();
         } else {
           return MayrMdCmsMarkdownRenderer(
