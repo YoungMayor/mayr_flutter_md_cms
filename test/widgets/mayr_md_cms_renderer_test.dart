@@ -13,7 +13,7 @@ void main() {
           home: Scaffold(
             body: MayrMdCms.custom(
               () async {
-                await Future.delayed(const Duration(seconds: 1));
+                await Future.delayed(const Duration(milliseconds: 100));
                 return '# Test Content';
               },
             ),
@@ -23,6 +23,9 @@ void main() {
 
       // Should show default loading widget
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      
+      // Wait for future to complete to avoid pending timer warning
+      await tester.pumpAndSettle();
     });
 
     testWidgets('displays custom loading widget while fetching content',
@@ -32,7 +35,7 @@ void main() {
           home: Scaffold(
             body: MayrMdCms.custom(
               () async {
-                await Future.delayed(const Duration(seconds: 1));
+                await Future.delayed(const Duration(milliseconds: 100));
                 return '# Test Content';
               },
               config: const MayrMdCmsConfig(
@@ -46,6 +49,9 @@ void main() {
       // Should show custom loading widget
       expect(find.text('Custom Loading'), findsOneWidget);
       expect(find.byType(CircularProgressIndicator), findsNothing);
+      
+      // Wait for future to complete to avoid pending timer warning
+      await tester.pumpAndSettle();
     });
 
     testWidgets('displays error widget when content loading fails',
