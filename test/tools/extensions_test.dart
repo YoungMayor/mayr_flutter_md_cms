@@ -31,16 +31,17 @@ void main() {
       expect(snackBar.content, isA<Text>());
     });
 
-    testWidgets('copyToClipboard copies text to clipboard',
-        (WidgetTester tester) async {
+    testWidgets('copyToClipboard copies text to clipboard', (
+      WidgetTester tester,
+    ) async {
       const testText = 'Test clipboard content';
-      
+
       // Copy to clipboard
       testText.copyToClipboard();
-      
+
       // Small delay to ensure async operation completes
       await tester.pump();
-      
+
       // Test passes if no exception is thrown
     });
   });
@@ -65,8 +66,9 @@ void main() {
       expect(capturedTheme.primaryColor, Colors.blue);
     });
 
-    testWidgets('navigator returns NavigatorState',
-        (WidgetTester tester) async {
+    testWidgets('navigator returns NavigatorState', (
+      WidgetTester tester,
+    ) async {
       late NavigatorState capturedNavigator;
 
       await tester.pumpWidget(
@@ -83,8 +85,9 @@ void main() {
       expect(capturedNavigator, isA<NavigatorState>());
     });
 
-    testWidgets('scaffoldMessenger returns ScaffoldMessengerState',
-        (WidgetTester tester) async {
+    testWidgets('scaffoldMessenger returns ScaffoldMessengerState', (
+      WidgetTester tester,
+    ) async {
       late ScaffoldMessengerState capturedMessenger;
 
       await tester.pumpWidget(
@@ -101,8 +104,9 @@ void main() {
       expect(capturedMessenger, isA<ScaffoldMessengerState>());
     });
 
-    testWidgets('snackText shows snackbar with text',
-        (WidgetTester tester) async {
+    testWidgets('snackText shows snackbar with text', (
+      WidgetTester tester,
+    ) async {
       const testMessage = 'Test snack message';
 
       await tester.pumpWidget(
@@ -128,16 +132,13 @@ void main() {
       expect(find.text(testMessage), findsOneWidget);
     });
 
-    testWidgets('snackText does not show if context is not mounted',
-        (WidgetTester tester) async {
+    testWidgets('snackText does not show if context is not mounted', (
+      WidgetTester tester,
+    ) async {
       // This test ensures the method checks if context is mounted
       // The actual behavior is hard to test directly, but we can verify no exception is thrown
-      
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: SizedBox(),
-        ),
-      );
+
+      await tester.pumpWidget(const MaterialApp(home: SizedBox()));
 
       // Test passes if no exception is thrown
     });

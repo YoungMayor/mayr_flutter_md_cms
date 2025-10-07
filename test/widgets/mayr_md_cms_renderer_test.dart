@@ -6,30 +6,30 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   group('MayrMdCmsRenderer', () {
-    testWidgets('displays loading widget while fetching content',
-        (WidgetTester tester) async {
+    testWidgets('displays loading widget while fetching content', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: MayrMdCms.custom(
-              () async {
-                await Future.delayed(const Duration(milliseconds: 100));
-                return '# Test Content';
-              },
-            ),
+            body: MayrMdCms.custom(() async {
+              await Future.delayed(const Duration(milliseconds: 100));
+              return '# Test Content';
+            }),
           ),
         ),
       );
 
       // Should show default loading widget
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
-      
+
       // Wait for future to complete to avoid pending timer warning
       await tester.pumpAndSettle();
     });
 
-    testWidgets('displays custom loading widget while fetching content',
-        (WidgetTester tester) async {
+    testWidgets('displays custom loading widget while fetching content', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -49,13 +49,14 @@ void main() {
       // Should show custom loading widget
       expect(find.text('Custom Loading'), findsOneWidget);
       expect(find.byType(CircularProgressIndicator), findsNothing);
-      
+
       // Wait for future to complete to avoid pending timer warning
       await tester.pumpAndSettle();
     });
 
-    testWidgets('displays error widget when content loading fails',
-        (WidgetTester tester) async {
+    testWidgets('displays error widget when content loading fails', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -72,16 +73,15 @@ void main() {
       expect(find.text('Failed to load content'), findsOneWidget);
     });
 
-    testWidgets('displays custom error widget when content loading fails',
-        (WidgetTester tester) async {
+    testWidgets('displays custom error widget when content loading fails', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: MayrMdCms.custom(
               () async => throw Exception('Failed to load'),
-              config: const MayrMdCmsConfig(
-                errorWidget: Text('Custom Error'),
-              ),
+              config: const MayrMdCmsConfig(errorWidget: Text('Custom Error')),
             ),
           ),
         ),
@@ -94,16 +94,11 @@ void main() {
       expect(find.text('Failed to load content'), findsNothing);
     });
 
-    testWidgets('displays empty widget when content is null',
-        (WidgetTester tester) async {
+    testWidgets('displays empty widget when content is null', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: MayrMdCms.custom(
-              () async => '',
-            ),
-          ),
-        ),
+        MaterialApp(home: Scaffold(body: MayrMdCms.custom(() async => ''))),
       );
 
       await tester.pumpAndSettle();
@@ -112,16 +107,15 @@ void main() {
       expect(find.text('Empty Content'), findsOneWidget);
     });
 
-    testWidgets('displays custom empty widget when content is null',
-        (WidgetTester tester) async {
+    testWidgets('displays custom empty widget when content is null', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: MayrMdCms.custom(
               () async => '',
-              config: const MayrMdCmsConfig(
-                emptyWidget: Text('Custom Empty'),
-              ),
+              config: const MayrMdCmsConfig(emptyWidget: Text('Custom Empty')),
             ),
           ),
         ),
@@ -134,8 +128,9 @@ void main() {
       expect(find.text('Empty Content'), findsNothing);
     });
 
-    testWidgets('renders markdown content successfully',
-        (WidgetTester tester) async {
+    testWidgets('renders markdown content successfully', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -153,14 +148,9 @@ void main() {
       expect(find.text('Test paragraph'), findsOneWidget);
     });
 
-    testWidgets('renders local markdown content',
-        (WidgetTester tester) async {
+    testWidgets('renders local markdown content', (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: MayrMdCms.local('assets/demo_md.md'),
-          ),
-        ),
+        MaterialApp(home: Scaffold(body: MayrMdCms.local('assets/demo_md.md'))),
       );
 
       await tester.pumpAndSettle();

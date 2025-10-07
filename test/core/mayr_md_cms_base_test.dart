@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mayr_md_cms/mayr_md_cms.dart';
 import 'package:mayr_md_cms/src/widgets/mayr_md_cms_renderer.dart';
@@ -9,7 +8,7 @@ class TestMdCms extends MayrMdCmsBase {
   final MayrMdCmsConfig config;
 
   TestMdCms({MayrMdCmsConfig? config})
-      : config = config ?? const MayrMdCmsConfig();
+    : config = config ?? const MayrMdCmsConfig();
 }
 
 void main() {
@@ -70,12 +69,8 @@ void main() {
     });
 
     test('allows custom config per instance', () {
-      final cms1 = TestMdCms(
-        config: const MayrMdCmsConfig(shrinkWrap: true),
-      );
-      final cms2 = TestMdCms(
-        config: const MayrMdCmsConfig(shrinkWrap: false),
-      );
+      final cms1 = TestMdCms(config: const MayrMdCmsConfig(shrinkWrap: true));
+      final cms2 = TestMdCms(config: const MayrMdCmsConfig(shrinkWrap: false));
 
       expect(cms1.config.shrinkWrap, true);
       expect(cms2.config.shrinkWrap, false);

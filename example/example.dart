@@ -13,10 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Mayr MD CMS Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        useMaterial3: true,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
       home: const HomePage(),
     );
   }
@@ -28,59 +25,56 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Mayr MD CMS Examples'),
-      ),
+      appBar: AppBar(title: const Text('Mayr MD CMS Examples')),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
           ElevatedButton(
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => const LocalAssetExample(),
-              ),
-            ),
+            onPressed:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const LocalAssetExample()),
+                ),
             child: const Text('Local Asset Example'),
           ),
           const SizedBox(height: 8),
           ElevatedButton(
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => const NetworkExample(),
-              ),
-            ),
+            onPressed:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const NetworkExample()),
+                ),
             child: const Text('Network Example'),
           ),
           const SizedBox(height: 8),
           ElevatedButton(
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => const CustomSourceExample(),
-              ),
-            ),
+            onPressed:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const CustomSourceExample(),
+                  ),
+                ),
             child: const Text('Custom Source Example'),
           ),
           const SizedBox(height: 8),
           ElevatedButton(
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => const InternalActionsExample(),
-              ),
-            ),
+            onPressed:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const InternalActionsExample(),
+                  ),
+                ),
             child: const Text('Internal Actions Example'),
           ),
           const SizedBox(height: 8),
           ElevatedButton(
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => const CustomizedExample(),
-              ),
-            ),
+            onPressed:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const CustomizedExample()),
+                ),
             child: const Text('Customized Example'),
           ),
         ],
@@ -125,11 +119,10 @@ class CustomSourceExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Custom Source Example')),
-      body: MayrMdCms.custom(
-        () async {
-          // Simulate fetching from a database or custom source
-          await Future.delayed(const Duration(seconds: 2));
-          return '''
+      body: MayrMdCms.custom(() async {
+        // Simulate fetching from a database or custom source
+        await Future.delayed(const Duration(seconds: 2));
+        return '''
 # Custom Markdown Content
 
 This content was loaded from a **custom source**.
@@ -148,8 +141,7 @@ MayrMdCms.custom(() async {
 
 Visit [Flutter](https://flutter.dev) for more information.
 ''';
-        },
-      ),
+      }),
     );
   }
 }
@@ -180,16 +172,17 @@ instead of opening URLs.
             'internal:show_alert': (context) {
               showDialog(
                 context: context,
-                builder: (_) => AlertDialog(
-                  title: const Text('Alert'),
-                  content: const Text('Internal action triggered!'),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text('OK'),
+                builder:
+                    (_) => AlertDialog(
+                      title: const Text('Alert'),
+                      content: const Text('Internal action triggered!'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text('OK'),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
               );
             },
             'internal:go_back': (context) {
@@ -197,9 +190,7 @@ instead of opening URLs.
             },
             'internal:show_snackbar': (context) {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Snackbar from internal action!'),
-                ),
+                const SnackBar(content: Text('Snackbar from internal action!')),
               );
             },
           },
@@ -288,24 +279,22 @@ Try changing the state to see different custom widgets!
 class CustomMdCms extends MayrMdCmsBase {
   @override
   MayrMdCmsConfig get config => MayrMdCmsConfig(
-        shrinkWrap: true,
-        markdownStyleSheet: MarkdownStyleSheet(
-          h1: const TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-            color: Colors.purple,
-          ),
-        ),
-        internalActions: {
-          'internal:custom_action': (context) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Custom class action!'),
-              ),
-            );
-          },
-        },
-      );
+    shrinkWrap: true,
+    markdownStyleSheet: MarkdownStyleSheet(
+      h1: const TextStyle(
+        fontSize: 28,
+        fontWeight: FontWeight.bold,
+        color: Colors.purple,
+      ),
+    ),
+    internalActions: {
+      'internal:custom_action': (context) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('Custom class action!')));
+      },
+    },
+  );
 }
 
 /// Example of using the custom class

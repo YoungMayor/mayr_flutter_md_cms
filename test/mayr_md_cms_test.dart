@@ -6,8 +6,9 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   group('Integration Tests', () {
-    testWidgets('renders markdown from custom source',
-        (WidgetTester tester) async {
+    testWidgets('renders markdown from custom source', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -25,8 +26,7 @@ void main() {
       expect(find.text('This is a test.'), findsOneWidget);
     });
 
-    testWidgets('renders markdown with links',
-        (WidgetTester tester) async {
+    testWidgets('renders markdown with links', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -42,8 +42,7 @@ void main() {
       expect(find.text('Click here'), findsOneWidget);
     });
 
-    testWidgets('handles internal actions',
-        (WidgetTester tester) async {
+    testWidgets('handles internal actions', (WidgetTester tester) async {
       bool actionTriggered = false;
 
       await tester.pumpWidget(
@@ -70,8 +69,7 @@ void main() {
       expect(actionTriggered, true);
     });
 
-    testWidgets('uses custom widgets for states',
-        (WidgetTester tester) async {
+    testWidgets('uses custom widgets for states', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -99,4 +97,3 @@ void main() {
     });
   });
 }
-

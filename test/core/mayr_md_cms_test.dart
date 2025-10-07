@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mayr_md_cms/mayr_md_cms.dart';
 import 'package:mayr_md_cms/src/widgets/mayr_md_cms_renderer.dart';

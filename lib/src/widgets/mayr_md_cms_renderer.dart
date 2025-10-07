@@ -37,7 +37,9 @@ class MayrMdCmsRenderer extends StatelessWidget {
           return config.loadingWidget ?? _defaultLoadingWidget();
         } else if (snapshot.hasError) {
           return config.errorWidget ?? _defaultErrorWidget();
-        } else if (!snapshot.hasData || snapshot.data == null || snapshot.data!.isEmpty) {
+        } else if (!snapshot.hasData ||
+            snapshot.data == null ||
+            snapshot.data!.isEmpty) {
           return config.emptyWidget ?? _defaultEmptyWidget();
         } else {
           return MayrMdCmsMarkdownRenderer(
@@ -59,9 +61,7 @@ class MayrMdCmsRenderer extends StatelessWidget {
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: [
-          Text("Failed to load content"),
-        ],
+        children: [Text("Failed to load content")],
       ),
     );
   }
@@ -71,9 +71,7 @@ class MayrMdCmsRenderer extends StatelessWidget {
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: [
-          Text("Empty Content"),
-        ],
+        children: [Text("Empty Content")],
       ),
     );
   }

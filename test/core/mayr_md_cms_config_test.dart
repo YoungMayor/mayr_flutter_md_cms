@@ -22,9 +22,7 @@ void main() {
       const emptyWidget = Text('Empty');
       const shrinkWrap = true;
       const scrollPhysics = AlwaysScrollableScrollPhysics();
-      final internalActions = {
-        'internal:test': (BuildContext context) {},
-      };
+      final internalActions = {'internal:test': (BuildContext context) {}};
 
       final config = MayrMdCmsConfig(
         loadingWidget: loadingWidget,
@@ -43,51 +41,53 @@ void main() {
       expect(config.internalActions, internalActions);
     });
 
-    testWidgets('markdownStyleSheetToUse returns custom stylesheet when provided',
-        (WidgetTester tester) async {
-      final customStyleSheet = MarkdownStyleSheet(
-        h1: const TextStyle(fontSize: 32),
-      );
+    testWidgets(
+      'markdownStyleSheetToUse returns custom stylesheet when provided',
+      (WidgetTester tester) async {
+        final customStyleSheet = MarkdownStyleSheet(
+          h1: const TextStyle(fontSize: 32),
+        );
 
-      final config = MayrMdCmsConfig(
-        markdownStyleSheet: customStyleSheet,
-      );
+        final config = MayrMdCmsConfig(markdownStyleSheet: customStyleSheet);
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Builder(
-            builder: (context) {
-              final stylesheet = config.markdownStyleSheetToUse(context);
-              expect(stylesheet, customStyleSheet);
-              return const SizedBox();
-            },
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Builder(
+              builder: (context) {
+                final stylesheet = config.markdownStyleSheetToUse(context);
+                expect(stylesheet, customStyleSheet);
+                return const SizedBox();
+              },
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
 
-    testWidgets('markdownStyleSheetToUse returns default stylesheet when not provided',
-        (WidgetTester tester) async {
-      const config = MayrMdCmsConfig();
+    testWidgets(
+      'markdownStyleSheetToUse returns default stylesheet when not provided',
+      (WidgetTester tester) async {
+        const config = MayrMdCmsConfig();
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Builder(
-            builder: (context) {
-              final stylesheet = config.markdownStyleSheetToUse(context);
-              expect(stylesheet, isNotNull);
-              expect(stylesheet, isA<MarkdownStyleSheet>());
-              return const SizedBox();
-            },
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Builder(
+              builder: (context) {
+                final stylesheet = config.markdownStyleSheetToUse(context);
+                expect(stylesheet, isNotNull);
+                expect(stylesheet, isA<MarkdownStyleSheet>());
+                return const SizedBox();
+              },
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   });
 
   group('MdCmsConfigExtension', () {
     test('orDefault returns config when not null', () {
-      const MayrMdCmsConfig? config = MayrMdCmsConfig(shrinkWrap: true);
+      const MayrMdCmsConfig config = MayrMdCmsConfig(shrinkWrap: true);
       final result = config.orDefault;
 
       expect(result, config);

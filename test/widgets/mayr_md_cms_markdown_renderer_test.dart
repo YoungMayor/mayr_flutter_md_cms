@@ -6,8 +6,9 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   group('MayrMdCmsMarkdownRenderer', () {
-    testWidgets('renders markdown content correctly',
-        (WidgetTester tester) async {
+    testWidgets('renders markdown content correctly', (
+      WidgetTester tester,
+    ) async {
       const markdownContent = '''
 # Heading 1
 ## Heading 2
@@ -20,9 +21,7 @@ This is a paragraph with **bold** and *italic* text.
 
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
-            body: MayrMdCms.custom(() async => markdownContent),
-          ),
+          home: Scaffold(body: MayrMdCms.custom(() async => markdownContent)),
         ),
       );
 
@@ -33,8 +32,9 @@ This is a paragraph with **bold** and *italic* text.
       expect(find.text('Heading 2'), findsOneWidget);
     });
 
-    testWidgets('respects shrinkWrap configuration',
-        (WidgetTester tester) async {
+    testWidgets('respects shrinkWrap configuration', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -50,8 +50,9 @@ This is a paragraph with **bold** and *italic* text.
       expect(find.text('Test'), findsOneWidget);
     });
 
-    testWidgets('handles internal actions on link tap',
-        (WidgetTester tester) async {
+    testWidgets('handles internal actions on link tap', (
+      WidgetTester tester,
+    ) async {
       bool actionCalled = false;
 
       await tester.pumpWidget(
@@ -81,16 +82,15 @@ This is a paragraph with **bold** and *italic* text.
       expect(actionCalled, true);
     });
 
-    testWidgets('ignores internal action if not defined',
-        (WidgetTester tester) async {
+    testWidgets('ignores internal action if not defined', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: MayrMdCms.custom(
               () async => '[Click me](internal:undefined_action)',
-              config: const MayrMdCmsConfig(
-                internalActions: {},
-              ),
+              config: const MayrMdCmsConfig(internalActions: {}),
             ),
           ),
         ),
@@ -105,8 +105,9 @@ This is a paragraph with **bold** and *italic* text.
       // Test passes if no exception is thrown
     });
 
-    testWidgets('handles multiple internal actions',
-        (WidgetTester tester) async {
+    testWidgets('handles multiple internal actions', (
+      WidgetTester tester,
+    ) async {
       int action1Count = 0;
       int action2Count = 0;
 
@@ -114,7 +115,8 @@ This is a paragraph with **bold** and *italic* text.
         MaterialApp(
           home: Scaffold(
             body: MayrMdCms.custom(
-              () async => '[Action 1](internal:action1)\n\n[Action 2](internal:action2)',
+              () async =>
+                  '[Action 1](internal:action1)\n\n[Action 2](internal:action2)',
               config: MayrMdCmsConfig(
                 internalActions: {
                   'internal:action1': (context) {
@@ -145,8 +147,9 @@ This is a paragraph with **bold** and *italic* text.
       expect(action2Count, 1);
     });
 
-    testWidgets('applies custom markdown stylesheet',
-        (WidgetTester tester) async {
+    testWidgets('applies custom markdown stylesheet', (
+      WidgetTester tester,
+    ) async {
       final customStyleSheet = MarkdownStyleSheet(
         h1: const TextStyle(fontSize: 48, color: Colors.red),
       );
@@ -156,9 +159,7 @@ This is a paragraph with **bold** and *italic* text.
           home: Scaffold(
             body: MayrMdCms.custom(
               () async => '# Custom Styled',
-              config: MayrMdCmsConfig(
-                markdownStyleSheet: customStyleSheet,
-              ),
+              config: MayrMdCmsConfig(markdownStyleSheet: customStyleSheet),
             ),
           ),
         ),
@@ -168,15 +169,10 @@ This is a paragraph with **bold** and *italic* text.
       expect(find.text('Custom Styled'), findsOneWidget);
     });
 
-    testWidgets('handles empty links gracefully',
-        (WidgetTester tester) async {
+    testWidgets('handles empty links gracefully', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
-            body: MayrMdCms.custom(
-              () async => '[Empty Link]()',
-            ),
-          ),
+          home: Scaffold(body: MayrMdCms.custom(() async => '[Empty Link]()')),
         ),
       );
 
