@@ -69,7 +69,10 @@ Whether you are building a blog, documentation app, or a CMS-driven mobile app, 
 
 - Extendable: Create your own custom Markdown CMS by extending the base class:
     ```dart
-    class CustomMdCms extends MayrMdCms {}
+    class CustomMdCms extends MayrMdCmsBase {
+      @override
+      MayrMdCmsConfig get config => MayrMdCmsConfig(...);
+    }
     ```
     Define your own custom behavior, UI components, and logic.
 
@@ -92,7 +95,7 @@ Whether you are building a blog, documentation app, or a CMS-driven mobile app, 
         mayr_md_cms: # check for the latest version on pub.dev
     ```
 
-2. Instal the package:
+2. Install the package:
     ```bash
     flutter pub get
     ```
@@ -102,7 +105,7 @@ Whether you are building a blog, documentation app, or a CMS-driven mobile app, 
     import 'package:mayr_md_cms/mayr_md_cms.dart';
     ```
 
-    > Alternatively, you could install it using the command
+    > Alternatively, you could install it using the command:
     > ```bash
     > flutter pub add mayr_md_cms
     > ```
@@ -126,9 +129,9 @@ import 'package:mayr_md_cms/mayr_md_cms.dart';
 If you have a Markdown file in your assets:
 
 ```dart
-MayrMdCms.fromLocal(
+MayrMdCms.local(
   'assets/content.md',
-  config: mayrMdCmsConfig // Config is optional
+  config: mayrMdCmsConfig, // Config is optional
 );
 
 // More on the config later
@@ -139,9 +142,9 @@ MayrMdCms.fromLocal(
 If you want to fetch the Markdown content from a URL:
 
 ```dart
-MayrMdCms.fromNetwork(
+MayrMdCms.network(
   'https://example.com/content.md',
-  config: mayrMdCmsConfig // Config is optional
+  config: mayrMdCmsConfig, // Config is optional
   dioClient: dioClient, // Optional
 );
 
@@ -168,7 +171,7 @@ Internal actions and handlers can be used as below:
 
 1. #### Define your internal actions on the config:
     ```dart
-    MayrMdCms.fromNetwork(
+    MayrMdCms.network(
       'https://example.com/content.md',
       config: MayrMdCmsConfig(
         internalActions: {
@@ -188,10 +191,10 @@ Now when user clicks on any of the action links, the associated actions would be
 
 ### 4. Extend the Package
 
-For more control, you can create a custom class that extends MayrMdCms and override methods or add new logic:
+For more control, you can create a custom class that extends `MayrMdCmsBase` and override methods or add new logic:
 
 ```dart
-class CustomMdCms extends MayrMdCms {
+class CustomMdCms extends MayrMdCmsBase {
   @override
   MayrMdCmsConfig get config => MayrMdCmsConfig(
     loadingWidget: MyCustomLoadingWidget(),
@@ -201,10 +204,10 @@ class CustomMdCms extends MayrMdCms {
     scrollPhysics: const NeverScrollableScrollPhysics(),
     internalActions: {
       "internal:indicate_interest": (context) {...},
-      "internal:go_to_signup": (context) => context.go("/signup"),
+      "internal:go_to_signup": (context) => Navigator.pushNamed(context, "/signup"),
       "internal:switch_theme_dark": (context) => MyThemeSwitcher.toDark(),
     },
-    markdownStyleSheet: MyCustomMarkdownStyleSheet()
+    markdownStyleSheet: MyCustomMarkdownStyleSheet(),
   );
 }
 ```
@@ -212,9 +215,9 @@ class CustomMdCms extends MayrMdCms {
 After the package has been extended, it can then be used as below:
 
 ```dart
-CustomMdCms().local(...);
-CustomMdCms().network(...);
-CustomMdCms().custom(...);
+CustomMdCms().local('assets/content.md');
+CustomMdCms().network('https://example.com/content.md');
+CustomMdCms().custom(() async => '# Custom Content');
 ```
 
 ## 🛠️  Configuration
@@ -230,10 +233,10 @@ MayrMdCmsConfig(
   scrollPhysics: const NeverScrollableScrollPhysics(),
   internalActions: {
     "internal:indicate_interest": (context) {...},
-    "internal:go_to_signup": (context) => context.go("/signup"),
+    "internal:go_to_signup": (context) => Navigator.pushNamed(context, "/signup"),
     "internal:switch_theme_dark": (context) => MyThemeSwitcher.toDark(),
   },
-  markdownStyleSheet: MyCustomMarkdownStyleSheet()
+  markdownStyleSheet: MyCustomMarkdownStyleSheet(),
 )
 ```
 
