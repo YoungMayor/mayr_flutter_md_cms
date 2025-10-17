@@ -105,7 +105,7 @@ class NetworkExample extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Network Example')),
       body: MayrMdCms.network(
-        'https://raw.githubusercontent.com/YoungMayor/mayr_flutter_md_cms/main/README.md',
+        'https://raw.githubusercontent.com/MayR-Labs/mayr_flutter_md_cms/main/README.md',
       ),
     );
   }

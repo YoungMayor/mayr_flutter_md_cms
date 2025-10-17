@@ -7,10 +7,10 @@
 ![Pub.dev Publisher](https://img.shields.io/pub/publisher/mayr_md_cms?label=Publisher&style=plastic)
 ![Downloads](https://img.shields.io/pub/dm/mayr_md_cms.svg?label=Downloads&style=plastic)
 
-![Build Status](https://img.shields.io/github/actions/workflow/status/YoungMayor/mayr_flutter_md_cms/ci.yaml?label=Build)
-![Issues](https://img.shields.io/github/issues/YoungMayor/mayr_flutter_md_cms.svg?label=Issues)
-![Last Commit](https://img.shields.io/github/last-commit/YoungMayor/mayr_flutter_md_cms.svg?label=Latest%20Commit)
-![Contributors](https://img.shields.io/github/contributors/YoungMayor/mayr_flutter_md_cms.svg?label=Contributors)
+![Build Status](https://img.shields.io/github/actions/workflow/status/MayR-Labs/mayr_flutter_md_cms/ci.yaml?label=Build)
+![Issues](https://img.shields.io/github/issues/MayR-Labs/mayr_flutter_md_cms.svg?label=Issues)
+![Last Commit](https://img.shields.io/github/last-commit/MayR-Labs/mayr_flutter_md_cms.svg?label=Latest%20Commit)
+![Contributors](https://img.shields.io/github/contributors/MayR-Labs/mayr_flutter_md_cms.svg?label=Contributors)
 
 - [📜 Mayr Markdown CMS](#-mayr-markdown-cms)
   - [🌟 Features](#-features)
@@ -282,3 +282,14 @@ You can also support by:
 - Contributing new ideas, features, or improvements.
 
 > Every little bit of support counts! 🚀💙
+
+---
+
+## 🏢 About MayR Labs
+
+**mayr_md_cms** is maintained by [MayR Labs](https://mayrlabs.com), an organization dedicated to building high-quality, open-source tools for developers.
+
+- 🌐 **Website**: [https://mayrlabs.com](https://mayrlabs.com)
+- 💻 **GitHub**: [https://github.com/MayR-Labs](https://github.com/MayR-Labs)
+
+Check out our other projects and join our growing community of developers!
